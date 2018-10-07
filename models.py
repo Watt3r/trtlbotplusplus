@@ -1,8 +1,10 @@
 import random
+import json
 
 from sqlalchemy import Table, Column, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
-from utils import config
+
+config = json.load(open('config.json'))
 
 Base = declarative_base()
 
