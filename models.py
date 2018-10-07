@@ -2,7 +2,7 @@ import random
 
 from sqlalchemy import Table, Column, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
-
+from utils import config
 
 Base = declarative_base()
 
