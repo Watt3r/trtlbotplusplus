@@ -3,6 +3,7 @@
   "prefix":".", # use something like ! , . ~ ` ?
   "coin": "Turtlecoin",
   "symbol": "TRTL", 
+  "addrLength": "99",
   "tip_amp_emoji": "tip",
   "tip_any_emoji": "tip100",
   "tip_any_amount": 100,
