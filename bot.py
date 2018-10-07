@@ -234,7 +234,7 @@ async def updatewallet(ctx, address):
         err_embed.description = "Address already registered by another user!"
         await client.send_message(ctx.message.author, embed = err_embed)
         return
-    elif exists and len(address) == 99:
+    elif exists and len(address) == config['addrLength']:
         old_pid = gen_paymentid(exists.address)
         old_balance = session.query(TipJar).filter(TipJar.paymentid == old_pid).first()
         exists.address = address
@@ -255,10 +255,10 @@ async def updatewallet(ctx, address):
         good_embed.description = "New Balance: `{:0,.2f}` {1}".format(old_balance.amount / config['units'], config['symbol'])
         await client.send_message(ctx.message.author, embed = good_embed)
         return
-    elif len(address) > 99:
-        err_embed.description = "Your wallet must be 99 characeters long, your entry was too long"
-    elif len(address) < 99:
-        err_embed.description = "Your wallet must be 99 characeters long, your entry was too short"
+    elif len(address) > config['addrLength']:
+        err_embed.description = "Your wallet must be {} characeters long, your entry was too long".format(config['addrLength'])
+    elif len(address) < config['addrLength']:
+        err_embed.description = "Your wallet must be {} characeters long, your entry was too short".format(config['addrLength'])
     await client.say(embed=err_embed)
 
 
