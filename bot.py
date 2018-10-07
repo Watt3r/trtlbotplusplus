@@ -183,7 +183,7 @@ async def registerwallet(ctx, address):
         await client.send_message(ctx.message.author, embed = err_embed)
         return
 
-    elif not exists and len(address) == 99:
+    elif not exists and len(address) == config['addrLength']:
         w = Wallet(address, ctx.message.author.id,ctx.message.id)
         session.add(w)
         session.commit()
@@ -205,10 +205,10 @@ async def registerwallet(ctx, address):
         balance = session.query(TipJar).filter(TipJar.paymentid == pid).first()
         await client.send_message(ctx.message.author, embed = good_embed)
         return
-    elif len(address) > 99:
-        err_embed.description = "Your wallet must be 99 characeters long, your entry was too long"
-    elif len(address) < 99:
-        err_embed.description = "Your wallet must be 99 characeters long, your entry was too short"
+    elif len(address) > config['addrLength']:
+        err_embed.description = "Your wallet must be {} characeters long, your entry was too long".format(config['addrLength'])
+    elif len(address) < config['addrLength']:
+        err_embed.description = "Your wallet must be {} characeters long, your entry was too short".format(config['addrLength'])
     await client.say(embed = err_embed)
 
 
